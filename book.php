@@ -3,7 +3,8 @@ ini_set('display_errors', 'On');
 error_reporting(E_ALL | E_STRICT);
 
 $continue = "";
-$i = 0;
+$i = 1;
+$fullResults = "";
 
 do 
 {
@@ -19,6 +20,7 @@ $pages = ($xml->query->pages);
 	foreach ($pages->page as $page) {
 
 		$title = (string)$page['title'];
+
 		$content = (string)$page->revisions->rev;
 
 		$mb = "{{Makombox";
@@ -26,6 +28,8 @@ $pages = ($xml->query->pages);
 
 		if ($makom !== false) {
 //			utf8_decode($content);
+			$template = file_get_contents("book_template.html");
+			$template = str_replace("{{title}}", $title, $template);
 			
 //			echo "<strong>";
 //			echo $title;
@@ -69,6 +73,8 @@ $pages = ($xml->query->pages);
 				$neighborhood = "";;
 			}
 // // // //
+        $template = str_replace("{{#}}", $i, $template);
+
 			if ($address) {        
         $template = str_replace("{{address}}", $address, $template);
         //				$array[$country][$state][$neighborhood][$title]['Address'] = $address;
@@ -95,18 +101,22 @@ $pages = ($xml->query->pages);
 //				echo "<br>";
 			}
 			if ($country) {
+        $template = str_replace("{{country}}", $country, $template);
 //				echo "Country: ".$country;
 //				echo "<br>";
 			}
 			if ($phone) {
+        $template = str_replace("{{phone}}", $phone, $template);
 //				echo "Phone: ".$phone;
 //				echo "<br>";
 			}
 			if ($neighborhood) {
+        $template = str_replace("{{neighborhood}}", $neighborhood, $template);
 //				echo "Neighborhood: ".$neighborhood;
 //				echo "<br>";
 			}
 			if ($price) {
+        $template = str_replace("{{price}}", $price, $template);
 //				echo "Price: ".$price;
 //				echo "<br>";
 			}
@@ -115,58 +125,69 @@ $pages = ($xml->query->pages);
 //				echo "<br>";
 			}
 			if ($activity_type) {
+        $template = str_replace("{{type}}", $activity_type." Activity", $template);
 //			echo "<strong>";
 //				echo "Activity: ".$activity_type;
 //				echo "<br>";
 //			echo "</strong>";
 			}
 			if ($lounge_type) {
+        $template = str_replace("{{type}}", $lounge_type." Lounge", $template);
 //			echo "<strong>";
 //				echo "Lounge Type: ".$lounge_type;
 //				echo "<br>";
 //			echo "</strong>";
 			}
 			if ($museum_type) {
+        $template = str_replace("{{type}}", $museum_type." Museum", $template);
 //			echo "<strong>";
 //				echo "Museum Type: ".$museum_type;
 //				echo "<br>";
 //			echo "</strong>";
 			}
 			if ($park_type) {
+        $template = str_replace("{{type}}", $park_type." Park", $template);
 //			echo "<strong>";
 //				echo "Park Type: ".$park_type;
 //				echo "<br>";
 //			echo "</strong>";
 			}
 			if ($shopping_type) {
+        $template = str_replace("{{type}}", $shopping_type." Shopping", $template);
 //			echo "<strong>";
 //				echo "Shopping Type: ".$shopping_type;
 //				echo "<br>";
 //			echo "</strong>";
 			}
 			if ($cuisine) {
+        $template = str_replace("{{type}}", "Food; ".$cuisine, $template);
 //			echo "<strong>";
 //				echo "Cuisine: ".$cuisine;
 //				echo "<br>";
 //			echo "</strong>";
 			}
 			if ($basic_description) {
+        $template = str_replace("{{description}}", $basic_description, $template);
 //				echo "Desciption: ".$basic_description;
 //				echo "<br>";
 			}
 			if ($tips) {
+        $template = str_replace("{{tips}}", $tips, $template);
 //				echo "Tips: ".$tips;
 //				echo "<br>";
 			}
 			if ($dairy_or_meat) {
+        $template = str_replace("{{dairy_or_meat}}", $dairy_or_meat, $template);
 //				echo "Dairy or Meat? ".$dairy_or_meat;
 //				echo "<br>";
 			}
 			if ($hashgacha) {
+        $template = str_replace("{{hashgacha}}", $hashgacha, $template);
 //				echo "Hashgacha: ".$hashgacha;
 //				echo "<br>";
 			}
 			if ($additional_kashrus) {
+        $template = str_replace("{{additional_kashrus}}", $additional_kashrus, $template);
 //				echo "additional_kashrus: ".$additional_kashrus;
 //				echo "<br>";
 			}
@@ -175,10 +196,12 @@ $pages = ($xml->query->pages);
 //				echo "<br>";
 			}
 			if ($hours) {
+        $template = str_replace("{{hours}}", $hours, $template);
 //				echo "Hours: ".$hours;
 //				echo "<br>";
 			}
 			if ($directions) {
+        $template = str_replace("{{directions}}", $directions, $template);
 //				echo "Directions: ".$directions;
 //				echo "<br>";
 			}
@@ -195,12 +218,14 @@ $pages = ($xml->query->pages);
 				// echo "<br>";
 			// }
 //			echo "<hr>";
+			++$i;
+			$fullResults .= $template;
 		}
 	}
 }
 while ($xml->{'query-continue'});
 
 //print_r($array);
-return $template;
+print_r ($fullResults);
 
 ?>
