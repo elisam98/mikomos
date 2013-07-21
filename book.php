@@ -7,7 +7,7 @@ $i = 0;
 
 do 
 {
-	$template = file_get_contents("book_template.html";
+	$template = file_get_contents("book_template.html");
 
 	$xml = simplexml_load_file("http://www.mikomos.com/w/api.php?action=query&format=xml&generator=allpages&prop=revisions&rvprop=content&gaplimit=max&gapcontinue=".$continue);
 	if ($xml->{'query-continue'}) {
@@ -200,6 +200,7 @@ $pages = ($xml->query->pages);
 }
 while ($xml->{'query-continue'});
 
-print_r($array);
+//print_r($array);
+return $template;
 
 ?>
