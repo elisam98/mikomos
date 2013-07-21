@@ -7,7 +7,8 @@ $i = 0;
 
 do 
 {
-	
+	$template = file_get_contents("book_template.html";
+
 	$xml = simplexml_load_file("http://www.mikomos.com/w/api.php?action=query&format=xml&generator=allpages&prop=revisions&rvprop=content&gaplimit=max&gapcontinue=".$continue);
 	if ($xml->{'query-continue'}) {
 		$continue = ((string)$xml->{'query-continue'}[0]->allpages['gapcontinue']);
@@ -68,24 +69,28 @@ $pages = ($xml->query->pages);
 				$neighborhood = "";;
 			}
 // // // //
-			if ($address) {
-				$array[$country][$state][$neighborhood][$title]['Address'] = $address;
+			if ($address) {        
+        $template = str_replace("{{address}}", $address, $template);
+        //				$array[$country][$state][$neighborhood][$title]['Address'] = $address;
 //				++$i;
 //				echo "Address: ".$address;
 //				echo "<br>";
 			}
 			if ($city) {
-				$array[$country][$state][$neighborhood][$title]['City'] = $city;
+        $template = str_replace("{{city}}", $city, $template);
+        //				$array[$country][$state][$neighborhood][$title]['City'] = $city;
 //				echo "City: ".$city;
 //				echo "<br>";
 			}
 			if ($state) {
-				$array[$country][$state][$neighborhood][$title]['State'] = $state;
+        $template = str_replace("{{state}}", $state, $template);
+        //				$array[$country][$state][$neighborhood][$title]['State'] = $state;
 //				echo "State: ".$state;
 //				echo "<br>";
 			}
 			if ($zip) {
-				$array[$country][$state][$neighborhood][$title]['Zip'] = $zip;
+        $template = str_replace("{{zip}}", $zip, $template);
+        //				$array[$country][$state][$neighborhood][$title]['Zip'] = $zip;
 //				echo "Zip: ".$zip;
 //				echo "<br>";
 			}
