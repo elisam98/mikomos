@@ -5,33 +5,33 @@
 		<meta http-equiv="Content-Type" content="text/html;charset=utf-8" />
 		<style type="text/css">
 			body {max-width: 8.5in; font-family: Arial; margin: 0; padding: 0.1in;}
-			#header {margin-bottom: .5in; display: block; overflow: hidden; font-size: 8px;}
-			#breadcrumbs {float: left;}
-			#pageNum {float: right;}
+			.header {margin-bottom: .5in; display: block; overflow: hidden; font-size: 8px;}
+			.breadcrumbs {float: left;}
+			.pageNum {float: right;}
 			ol li {display: inline;}
 			ol {padding: 0;}
 			.title {font-size: 20px; font-weight: bold;}
 			.type {font-size: 12px; font-weight: bold; font-style: italic; color:#888888;}
-			#addressBar {font-size: 10px;}
+			.addressBar {font-size: 10px;}
 			hr {margin: .05in;}
-			#desc {margin-bottom: .1in; font-size: 10px;}
-			#tip {margin-bottom: .1in; font-size: 10px; font-weight: bold;}
+			.desc {margin-bottom: .1in; font-size: 10px;}
+			.tip {margin-bottom: .1in; font-size: 10px; font-weight: bold;}
 			span.tips {font-size: 8px; font-style: italic; color:#888888;}
-			#content {margin-bottom: .2in;}
-			#bottom, #firstRow, #secondRow {overflow: hidden;}
-			#topLeft {float:left; width:50%;}
-			#topRight {float:right; width:50%;}
-			#bottomLeft {float:left; width:50%;}
-			#bottomRight {float:right; width:50%;}
+			.content {margin-bottom: .2in;}
+			.bottom, #firstRow, #secondRow {overflow: hidden;}
+			.topLeft {float:left; width:50%;}
+			.topRight {float:right; width:50%;}
+			.bottomLeft {float:left; width:50%;}
+			.bottomRight {float:right; width:50%;}
 			.quarter {margin: .1in;}
 			.subHeader {font-size: 10px; font-weight: bold;}
-			#subItalic {font-size: 8px; font-style: italic;}
+			.subItalic {font-size: 8px; font-style: italic;}
 			.subContent {font-size: 8px; color:#888888;}
 		</style>
 	</head>
 	<body>
-		<div id="header">
-			<div id="breadcrumbs">
+		<div class="header">
+			<div class="breadcrumbs">
 				<ol>
 					<li>Mikomos</li>
 					<li>>> <span class="country">{{country}}</span></li>
@@ -39,17 +39,17 @@
 					<li>>> <span class="neighborhood">{{neighborhood}}</span></li>							
 				</ol>
 			</div>
-			<div id="pageNum">Page 
+			<div class="pageNum">Page 
 				<span class="pageNumber">{{#}}</span>
 			</div>
 		</div>
-		<div id="main">
-			<div id="top">
+		<div class="main">
+			<div class="top">
 				<span class="title">{{title}}</span>
 				<br />
 				<span class="type">{{type}}</span>
 				<br />
-				<ol id="addressBar">
+				<ol class="addressBar">
 					<li><span class="neighborhood">{{neighborhood}}</span></li>
 					<li> &bull; <span class="address">{{address}}</span></li>
 					<li> &bull; 
@@ -62,28 +62,28 @@
 				</ol>
 			</div>
 			<hr />
-			<div id="content">
-				<div id="desc">
+			<div class="content">
+				<div class="desc">
 					<span class="description">{{description}}</span>
 				</div>
-				<div id="tip">Tips 
+				<div class="tip">Tips 
 					<br />
 					<span class="tips">{{tips}}</span>
 				</div>
 			</div>
-			<div id="bottom">
-				<div id="firstRow">
-					<div id="topLeft">
+			<div class="bottom">
+				<div class="firstRow">
+					<div class="topLeft">
 						<div class="quarter">
 							<span class="subHeader">Hours </span>
-							<span id="subItalic">Subject to Change</span>
+							<span class="subItalic">Subject to Change</span>
 							<hr />
 							<div class="subContent">
 								<span class="hours">{{hours}}</span>
 							</div>
 						</div>
 					</div>
-					<div id="topRight">
+					<div class="topRight">
 						<div class="quarter">
 							<span class="subHeader">Directions</span>
 							<hr />
@@ -93,8 +93,8 @@
 						</div>
 					</div>
 				</div>
-				<div id="secondRow">
-					<div id="bottomLeft">
+				<div class="secondRow">
+					<div class="bottomLeft">
 						<div class="quarter">
 							<span class="subHeader">Average Price</span>
 							<hr />
@@ -103,7 +103,7 @@
 							</div>
 						</div>
 					</div>
-					<div id="bottomRight">
+					<div class="bottomRight">
 						<div class="quarter">
 							<span class="subHeader">Kashrus</span>
 							<hr />

@@ -76,47 +76,43 @@ $pages = ($xml->query->pages);
         $template = str_replace("{{#}}", $i, $template);
 
 			if ($address) {        
-        $template = str_replace("{{address}}", $address, $template);
-        //				$array[$country][$state][$neighborhood][$title]['Address'] = $address;
+				$array[$country][$state][$neighborhood][$title]['address'] = $address;
 //				++$i;
 //				echo "Address: ".$address;
 //				echo "<br>";
 			}
 			if ($city) {
-        $template = str_replace("{{city}}", $city, $template);
-        //				$array[$country][$state][$neighborhood][$title]['City'] = $city;
+				$array[$country][$state][$neighborhood][$title]['city'] = $city;
 //				echo "City: ".$city;
 //				echo "<br>";
 			}
 			if ($state) {
-        $template = str_replace("{{state}}", $state, $template);
-        //				$array[$country][$state][$neighborhood][$title]['State'] = $state;
+				$array[$country][$state][$neighborhood][$title]['state'] = $state;
 //				echo "State: ".$state;
 //				echo "<br>";
 			}
 			if ($zip) {
-        $template = str_replace("{{zip}}", $zip, $template);
-        //				$array[$country][$state][$neighborhood][$title]['Zip'] = $zip;
+				$array[$country][$state][$neighborhood][$title]['zip'] = $zip;
 //				echo "Zip: ".$zip;
 //				echo "<br>";
 			}
 			if ($country) {
-        $template = str_replace("{{country}}", $country, $template);
+				$array[$country][$state][$neighborhood][$title]['country'] = $country;
 //				echo "Country: ".$country;
 //				echo "<br>";
 			}
 			if ($phone) {
-        $template = str_replace("{{phone}}", $phone, $template);
+				$array[$country][$state][$neighborhood][$title]['phone'] = $phone;
 //				echo "Phone: ".$phone;
 //				echo "<br>";
 			}
 			if ($neighborhood) {
-        $template = str_replace("{{neighborhood}}", $neighborhood, $template);
+				$array[$country][$state][$neighborhood][$title]['neighborhood'] = $neighborhood;
 //				echo "Neighborhood: ".$neighborhood;
 //				echo "<br>";
 			}
 			if ($price) {
-        $template = str_replace("{{price}}", $price, $template);
+				$array[$country][$state][$neighborhood][$title]['price'] = $price;
 //				echo "Price: ".$price;
 //				echo "<br>";
 			}
@@ -125,99 +121,87 @@ $pages = ($xml->query->pages);
 //				echo "<br>";
 			}
 			if ($activity_type) {
-        $template = str_replace("{{type}}", $activity_type." Activity", $template);
+				$array[$country][$state][$neighborhood][$title]['activity_type'] = $activity_type;
 //			echo "<strong>";
 //				echo "Activity: ".$activity_type;
 //				echo "<br>";
 //			echo "</strong>";
 			}
 			if ($lounge_type) {
-        $template = str_replace("{{type}}", $lounge_type." Lounge", $template);
+				$array[$country][$state][$neighborhood][$title]['lounge_type'] = $activity_type;
 //			echo "<strong>";
 //				echo "Lounge Type: ".$lounge_type;
 //				echo "<br>";
 //			echo "</strong>";
 			}
 			if ($museum_type) {
-        $template = str_replace("{{type}}", $museum_type." Museum", $template);
+				$array[$country][$state][$neighborhood][$title]['museum_type'] = $museum_type;
 //			echo "<strong>";
 //				echo "Museum Type: ".$museum_type;
 //				echo "<br>";
 //			echo "</strong>";
 			}
 			if ($park_type) {
-        $template = str_replace("{{type}}", $park_type." Park", $template);
+				$array[$country][$state][$neighborhood][$title]['park_type'] = $park_type;
 //			echo "<strong>";
 //				echo "Park Type: ".$park_type;
 //				echo "<br>";
 //			echo "</strong>";
 			}
 			if ($shopping_type) {
-        $template = str_replace("{{type}}", $shopping_type." Shopping", $template);
+				$array[$country][$state][$neighborhood][$title]['shopping_type'] = $shopping_type;
 //			echo "<strong>";
 //				echo "Shopping Type: ".$shopping_type;
 //				echo "<br>";
 //			echo "</strong>";
 			}
 			if ($cuisine) {
-        $template = str_replace("{{type}}", "Food; ".$cuisine, $template);
+				$array[$country][$state][$neighborhood][$title]['cuisine'] = $cuisine;
 //			echo "<strong>";
 //				echo "Cuisine: ".$cuisine;
 //				echo "<br>";
 //			echo "</strong>";
 			}
 			if ($basic_description) {
-        $template = str_replace("{{description}}", $basic_description, $template);
+				$array[$country][$state][$neighborhood][$title]['basic_description'] = $basic_description;
 //				echo "Desciption: ".$basic_description;
 //				echo "<br>";
 			}
 			if ($tips) {
-        $template = str_replace("{{tips}}", $tips, $template);
+				$array[$country][$state][$neighborhood][$title]['tips'] = $tips;
 //				echo "Tips: ".$tips;
 //				echo "<br>";
 			}
 			if ($dairy_or_meat) {
-        $template = str_replace("{{dairy_or_meat}}", $dairy_or_meat, $template);
+				$array[$country][$state][$neighborhood][$title]['dairy_or_meat'] = $dairy_or_meat;
 //				echo "Dairy or Meat? ".$dairy_or_meat;
 //				echo "<br>";
 			}
 			if ($hashgacha) {
-        $template = str_replace("{{hashgacha}}", $hashgacha, $template);
+				$array[$country][$state][$neighborhood][$title]['hashgacha'] = $hashgacha;
 //				echo "Hashgacha: ".$hashgacha;
 //				echo "<br>";
 			}
 			if ($additional_kashrus) {
-        $template = str_replace("{{additional_kashrus}}", $additional_kashrus, $template);
+				$array[$country][$state][$neighborhood][$title]['additional_kashrus'] = $additional_kashrus;
 //				echo "additional_kashrus: ".$additional_kashrus;
 //				echo "<br>";
 			}
 			if ($menu) {
+				$array[$country][$state][$neighborhood][$title]['menu'] = $menu;
 //				echo "Menu: <a href='".$menu."'>".$menu."</a>";
 //				echo "<br>";
 			}
 			if ($hours) {
-        $template = str_replace("{{hours}}", $hours, $template);
+				$array[$country][$state][$neighborhood][$title]['hours'] = $hours;
 //				echo "Hours: ".$hours;
 //				echo "<br>";
 			}
 			if ($directions) {
-        $template = str_replace("{{directions}}", $directions, $template);
+				$array[$country][$state][$neighborhood][$title]['directions'] = $directions;
 //				echo "Directions: ".$directions;
 //				echo "<br>";
 			}
-			// if ($tips) {
-				// echo "Tips: ".$tips;
-				// echo "<br>";
-			// }
-			// if ($tips) {
-				// echo "Tips: ".$tips;
-				// echo "<br>";
-			// }
-			// if ($tips) {
-				// echo "Tips: ".$tips;
-				// echo "<br>";
-			// }
-//			echo "<hr>";
 			++$i;
 			$fullResults .= $template;
 		}
