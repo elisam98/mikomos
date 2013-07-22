@@ -209,7 +209,7 @@ $pages = ($xml->query->pages);
 }
 while ($xml->{'query-continue'});
 
-//print_r($array);
-print_r ($fullResults);
+print_r($array);
+// print_r ($fullResults);
 
 ?>

@@ -276,7 +276,7 @@ $pages = ($xml->query->pages);
 //				$template = str_replace("{{address}}", $address, $template);
 			}
 			if ($shopping_type) {
-				$template = str_replace("{{type}}", "Shopping; "$shopping_type, $template);
+				$template = str_replace("{{type}}", "Shopping; ".$shopping_type, $template);
 			}
 			else {
 //				$template = str_replace("{{address}}", $address, $template);
