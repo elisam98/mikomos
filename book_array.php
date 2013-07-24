@@ -1,5 +1,5 @@
 <?php
-ini_set('display_errors', 'On');
+ini_set('display_errors', 'Off');
 error_reporting(E_ALL | E_STRICT);
 
 $continue = "";
@@ -207,7 +207,83 @@ foreach ($array as $key => $row) {
 }
 
 array_multisort($countrySort, SORT_ASC, $stateSort, SORT_ASC, $neighborhoodSort, SORT_ASC, $titleSort, SORT_ASC, $array);
-print_r($array);
+
+//	print_r($array);
 // print_r ($fullResults);
 
+	$countries = array();
+	$states = array();
+	$neighborhoods = array();
+
+echo "<table>
+		<thead>
+			<tr>
+				<th></th>
+				<th>Makom</th>
+				<th>Page</th>
+			</tr>
+		</thead>
+		<tbody>";
+foreach ($array as $key => $value) {
+	$key = $key+1;
+
+	if ((!in_array($value['country'], $countries)) || (!in_array($value['state'], $states)) || (!in_array($value['neighborhood'], $neighborhoods))) {
+		array_push($countries, $value['country']);
+		array_push($states, $value['state']);
+		array_push($neighborhoods, $value['neighborhood']);
+//		print_r ($countr."<br>");
+		echo "<tr><td></td><td colspan=\"2\"><hr /></td></tr><tr>";
+		
+		if ($value['neighborhood']) {
+			echo "<th align=\"left\">".$value['country']." &bull; ".$value['state']." &bull; ".$value['neighborhood']."</th>";
+		}
+		elseif ($value['state']) {
+			echo "<th align=\"left\">".$value['country']." &bull; ".$value['state']."</th>";
+		}
+		elseif ($value['country']) {
+			echo "<th align=\"left\">".$value['country']."</th>";
+		}
+		
+		echo "</tr>"/*<tr><td><hr style=\"border: 0; border-bottom: 1px dashed black; color:white;\"/></td></tr>"*/;
+//		echo "original";
+	}
+
+		echo "<tr>
+				<td></td>
+				<td>".$value['title']."</td>
+				<td align=\"right\">".$key."</td>
+			</tr>";
+
+}
+//	print_r ($countries);
+	echo "</tbody>
+			</table>";
+
+
+////////////////////////////////////
+// Print Back Index (Alphabetical //
+////////////////////////////////////
+
+// echo "<table><thead><tr><th>Makom</th><th>Page #</th></tr></thead><tbody>";
+
+$k = 1;
+
+
+foreach ($array as $key => $value) {
+
+	$key = $key+1;
+//		echo ($key).": ".$value['title']."<br />";
+		$index[$key] = $value['title'];
+		// ++$k;
+}
+		asort($index);
+foreach ($index as $key => $value) {
+
+//	echo "<tr><td>$value</td><td>$key</td></tr>";
+}
+//	echo "</tbody></table>";
+
+///////////////
+// End Index //
+///////////////
 ?>
