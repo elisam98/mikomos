@@ -197,93 +197,121 @@ do
 }
 while ($xml->{'query-continue'});
 
-foreach ($array as $key => $row) {
-	// if ($row['state']) {
-		$countrySort[$key] = $row['country'];
-		$stateSort[$key] = $row['state'];
-		$neighborhoodSort[$key] = $row['neighborhood'];
-		$titleSort[$key] = $row['title'];
-	// }
-}
+printTOC($array);
 
-array_multisort($countrySort, SORT_ASC, $stateSort, SORT_ASC, $neighborhoodSort, SORT_ASC, $titleSort, SORT_ASC, $array);
 
-//	print_r($array);
-// print_r ($fullResults);
+function printTOC($array) {
 
-	$countries = array();
-	$states = array();
-	$neighborhoods = array();
-
-echo "<table>
-		<thead>
-			<tr>
-				<th></th>
-				<th>Makom</th>
-				<th>Page</th>
-			</tr>
-		</thead>
-		<tbody>";
-foreach ($array as $key => $value) {
-	$key = $key+1;
-
-	if ((!in_array($value['country'], $countries)) || (!in_array($value['state'], $states)) || (!in_array($value['neighborhood'], $neighborhoods))) {
-		array_push($countries, $value['country']);
-		array_push($states, $value['state']);
-		array_push($neighborhoods, $value['neighborhood']);
-//		print_r ($countr."<br>");
-		echo "<tr><td></td><td colspan=\"2\"><hr /></td></tr><tr>";
-		
-		if ($value['neighborhood']) {
-			echo "<th align=\"left\">".$value['country']." &bull; ".$value['state']." &bull; ".$value['neighborhood']."</th>";
-		}
-		elseif ($value['state']) {
-			echo "<th align=\"left\">".$value['country']." &bull; ".$value['state']."</th>";
-		}
-		elseif ($value['country']) {
-			echo "<th align=\"left\">".$value['country']."</th>";
-		}
-		
-		echo "</tr>"/*<tr><td><hr style=\"border: 0; border-bottom: 1px dashed black; color:white;\"/></td></tr>"*/;
-//		echo "original";
+	foreach ($array as $key => $row) {
+		// if ($row['state']) {
+			$countrySort[$key] = $row['country'];
+			$stateSort[$key] = $row['state'];
+			$neighborhoodSort[$key] = $row['neighborhood'];
+			$titleSort[$key] = $row['title'];
+		// }
 	}
 
+	array_multisort($countrySort, SORT_ASC, $stateSort, SORT_ASC, $neighborhoodSort, SORT_ASC, $titleSort, SORT_ASC, $array);
+
+	//	print_r($array);
+	// print_r ($fullResults);
+
+		$countries = array();
+		$states = array();
+		$neighborhoods = array();
+
+	echo "<table>
+			<thead>
+				<tr>
+					<td clospan=\"3\" align=\"justify\"><h1>Table of Contents</h1></td>
+				</tr>
+				<tr>
+					<th></th>
+					<th>Makom</th>
+					<th>Page</th>
+				</tr>
+			</thead>
+			<tbody>";
+	foreach ($array as $key => $value) {
+		$key = $key+1;
+
+		if ((!in_array($value['country'], $countries)) || (!in_array($value['state'], $states)) || (!in_array($value['neighborhood'], $neighborhoods))) {
+			array_push($countries, $value['country']);
+			array_push($states, $value['state']);
+			array_push($neighborhoods, $value['neighborhood']);
+	//		print_r ($countr."<br>");
+			echo "<tr>
+					<td>&nbsp;</td>
+					<td colspan=\"2\"><hr /></td>
+				</tr>
+				<tr>";
+			
+			if ($value['neighborhood']) {
+				echo "<th align=\"right\">".$value['country']." &bull; ".$value['state']." &bull; ".$value['neighborhood']."</th>";
+			}
+			elseif ($value['state']) {
+				echo "<th align=\"right\">".$value['country']." &bull; ".$value['state']."</th>";
+			}
+			elseif ($value['country']) {
+				echo "<th align=\"right\">".$value['country']."</th>";
+			}
+			
+			echo "</tr>";
+		}
+
+			echo "<tr>
+					<td></td>
+					<td>".$value['title']."</td>
+					<td align=\"right\">".$key."</td>
+				</tr>";
+
+	}
+	//	print_r ($countries);
+		echo "</tbody>
+				</table>";
+		echo "<div style=\"page-break-before: always\">&nbsp</div>";
+}
+
+function printIndex($array) {
+	////////////////////////////////////
+	// Print Back Index (Alphabetical //
+	////////////////////////////////////
+
+	echo "<table>
+			<thead>
+				<tr>
+					<th colspan=\"3\"><h1>Alphabetical Index of Mikomos</h1></th>
+				</tr>
+			</thead>
+			<tbody>";
+
+	$k = 1;
+
+
+	foreach ($array as $key => $value) {
+
+		$key = $key+1;
+	//		echo ($key).": ".$value['title']."<br />";
+			$index[$key] = $value['title'];
+			// ++$k;
+	}
+	
+	asort($index);
+	
+	foreach ($index as $key => $value) {
+
 		echo "<tr>
-				<td></td>
-				<td>".$value['title']."</td>
-				<td align=\"right\">".$key."</td>
+				<td align=\"right\">$value</td>
+				<td style=\"width:5in;\"><hr style=\"border: 0; border-bottom: 1px dashed black; color:white;\" /></td>
+				<td align=\"justify\">Page $key</td>
 			</tr>";
+	}
+		echo "</tbody>
+				</table>";
 
+	///////////////
+	// End Index //
+	///////////////
 }
-//	print_r ($countries);
-	echo "</tbody>
-			</table>";
 
-
-////////////////////////////////////
-// Print Back Index (Alphabetical //
-////////////////////////////////////
-
-// echo "<table><thead><tr><th>Makom</th><th>Page #</th></tr></thead><tbody>";
-
-$k = 1;
-
-
-foreach ($array as $key => $value) {
-
-	$key = $key+1;
-//		echo ($key).": ".$value['title']."<br />";
-		$index[$key] = $value['title'];
-		// ++$k;
-}
-		asort($index);
-foreach ($index as $key => $value) {
-
-//	echo "<tr><td>$value</td><td>$key</td></tr>";
-}
-//	echo "</tbody></table>";
-
-///////////////
-// End Index //
-///////////////
 ?>

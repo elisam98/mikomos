@@ -202,12 +202,42 @@ $pages = ($xml->query->pages);
 //				echo "<br>";
 			}
 			if ($image) {
-				if (strpos($image, "http://")) {
+				$image = str_replace(" ", "%20", $image);
+				$query = simplexml_load_file("http://www.mikomos.com/w/api.php?action=query&titles=File:$image&prop=imageinfo&iiprop=url&format=xml");
+				$result = (string)$query->query->pages->page->imageinfo->ii['url'];
+
+				echo $image."<br />";
+				echo "<img src=\"$result\">";
+				echo "<br />";
+//				echo "<br />";
+				
+/* 				$hash = md5($image);
+				$one = substr($hash, 0, 1);
+				$two = substr($hash, 0, 2);
+				
+				$url = "http://www.mikomos.com/w/images/$one/$two/$image";
+				$result = get_headers($url);
+				$result = $result[0];
+				
+//					echo $result.": ".$url."<br />";
+					
+ 				if ($result == "HTTP/1.0 200 OK") {
+					echo $image.": ".$hash."<br />";
+					echo "<img src=\"$url\">";
+				}
+				else {
+					$url = "http://upload.wikimedia.org/wikipedia/commons/$one/$two/$image";
+					echo $image.": ".$hash."<br />";
+					echo "<img src=\"$url\">";
+					echo "<br />";
+				}
+ */			
+/* 				if (strpos($image, "http://")) {
 					echo "<img src='".$image."' />";
 				}
 				else {
 					echo "<img src='http://www.mikomos.com/w/images/b/b4/".$image."' />";
-				}
+				} */
 			}
 			++$i;
 			$fullResults .= $template;

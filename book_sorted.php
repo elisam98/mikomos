@@ -6,8 +6,8 @@
 		<style type="text/css">
 			body {max-width: 8.5in; font-family: Arial; margin: 0; padding: 0.1in;}
 			.header {margin-bottom: .5in; display: block; overflow: hidden; font-size: 8px;}
-			.breadcrumbs {float: left;}
-			.pageNum {float: right;}
+			.breadcrumbs {float: right;}
+			.pageNum {text-align: right; font-size: 10px; font-weight: bold;}
 			ol li {display: inline;}
 			ol {padding: 0;}
 			.title {font-size: 20px; font-weight: bold;}
@@ -17,8 +17,10 @@
 			.desc {margin-bottom: .1in; font-size: 10px;}
 			.tip {margin-bottom: .1in; font-size: 10px; font-weight: bold;}
 			span.tips {font-size: 8px; font-style: italic; color:#888888;}
-			.content {margin-bottom: .2in;}
+			.content {margin-bottom: .2in; overflow: hidden;}
 			.bottom, #firstRow, #secondRow {overflow: hidden;}
+			.image {text-align:center; padding:15px;}
+			img {max-height:400px; max-width:100%;}
 			.topLeft {float:left; width:50%;}
 			.topRight {float:right; width:50%;}
 			.bottomLeft {float:left; width:50%;}
@@ -69,7 +71,7 @@ do
 			$activity_type="";$tips="";$hours="";$directions="";
 			$cuisine="";$dairy_or_meat="";$hashgacha="";
 			$additional_kashrus="";$menu="";$lounge_type="";
-			$museum_type="";$park_type="";$shopping_type="";
+			$museum_type="";$park_type="";$shopping_type="";$image="";
 
 			parse_str($content);
 			if (!$country && $city) {
@@ -161,6 +163,9 @@ do
 			if ($directions) {
 				$array[$i]['directions'] = $directions;
 			}
+			if ($image) {
+				$array[$i]['image'] = $image;
+			}
 			++$i;
 		}
 	}
@@ -200,12 +205,17 @@ foreach ($array as $key => $value) {
 	$museum_type = $value['museum_type'];
 	$park_type = $value['park_type'];
 	$shopping_type = $value['shopping_type'];
+	$image = $value['image'];
 	
 //	echo $country." -> ".$state." -> ".$neighborhood.": ".$title;
 //	echo "<br />";
 
 	$template = <<<EOF
 		<div class="header">
+			<div class="pageNum">&bull;
+				<span class="pageNumber">&nbsp;{{#}}&nbsp;</span>
+				&bull;
+			</div>
 			<div class="breadcrumbs">
 				<ol>
 					<li>Mikomos</li>
@@ -213,9 +223,6 @@ foreach ($array as $key => $value) {
 					<li>>> <span class="state">{{state}}</span></li>
 					<li>>> <span class="neighborhood">{{neighborhood}}</span></li>							
 				</ol>
-			</div>
-			<div class="pageNum">Page 
-				<span class="pageNumber">{{#}}</span>
 			</div>
 		</div>
 		<div class="main">
@@ -292,6 +299,9 @@ foreach ($array as $key => $value) {
 						</div>
 					</div>
 				</div>
+			</div>
+			<div class="image">
+				<img src="{{image}}" />
 			</div>
 		</div>
 EOF;
@@ -471,9 +481,19 @@ EOF;
 							</div>
 						</div>", "", $template);
 			}
+			if ($image) {
+				$image = str_replace(" ", "%20", $image);
+				$query = simplexml_load_file("http://www.mikomos.com/w/api.php?action=query&titles=File:$image&prop=imageinfo&iiprop=url&format=xml");
+				$result = (string)$query->query->pages->page->imageinfo->ii['url'];
+
+				$template = str_replace("{{image}}", $result, $template);
+			}
+			else {
+				$template = str_replace("<img src=\"{{image}}\" />", "", $template);
+			}
 //			++$i;
 //			$template .= "<div style=\"page-break-before: always\"> </div>";
-			print_r ($template."<div style=\"page-break-before: always\"> </div>");
+			print_r ($template."<div style=\"page-break-before: always\">&nbsp</div>");
 
 }
 ?>
