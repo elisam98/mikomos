@@ -63,6 +63,8 @@ do
 			$content = str_replace("{{Tags", "", $content);
 			$content = str_replace("}}", "", $content);
 			$content = str_replace("|", "&", $content);
+			$content = str_replace("<u>", "", $content);
+			$content = str_replace("</u>", "", $content);
 //			$content = str_replace("*", "<br />&bull;", $content);
 
 			$title="";
